@@ -22,7 +22,7 @@ spec:
             - containerPort: 5000
           env:
             - name: RABBITMQ_PORT
-              value: "connection"
+              value: "5672"
             - name: RABBITMQ_HOST
               value: "rabbitmq"
 ---
@@ -37,4 +37,4 @@ spec:
   ports:
     - port: 80
       targetPort: 5000
-      nodePort: 31000
+      nodePort: 30001
