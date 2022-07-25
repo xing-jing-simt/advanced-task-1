@@ -93,6 +93,10 @@ namespace TaskApi.Controllers
                 return Problem("Entity set 'TaskContext.TaskItems'  is null.");
             }
 
+            _context.TaskItems.Add(taskItem);
+            await _context.SaveChangesAsync();
+            Console.WriteLine("posted task item");
+
             Console.WriteLine(System.Environment.GetEnvironmentVariable("RABBITMQ_HOST"));
             Console.WriteLine(System.Environment.GetEnvironmentVariable("RABBITMQ_PORT"));
             var factory = new ConnectionFactory()
@@ -123,9 +127,6 @@ namespace TaskApi.Controllers
                     body: body
                 );
             }
-
-            _context.TaskItems.Add(taskItem);
-            await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTaskItem), new { id = taskItem.Id }, taskItem);
         }
